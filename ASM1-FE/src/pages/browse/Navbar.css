@@ -1,0 +1,30 @@
+.navbarfixed {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 5;
+}
+
+.navbarfixed .navbar {
+    /* width: 100%; */
+    padding: auto 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+
+.background {
+    background-color: black;
+    transition: 1s ease;
+}
+
+.navbar h2 {
+    color: red;
+    margin-left: 50px;
+
+}
+
+.navbar p {}

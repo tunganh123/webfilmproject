@@ -1,0 +1,23 @@
+.movielist {
+    margin: 30px 50px;
+    margin-bottom: 0px;
+}
+
+.movielist img:hover {
+    position: relative;
+    scale: 1.2;
+    transition: 1s ease;
+    z-index: 5;
+
+}
+
+.detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 30px 50px;
+    margin-bottom: 80px;
+}
+
+.info h2 {
+    border-bottom: 2px solid rgb(59, 57, 57);
+}
