@@ -9,11 +9,11 @@ const app = express();
 // Thiet lap port
 app.set("port", process.env.PORT);
 // Thiet lap cors
-const corsoption = {
-  origin: "http://localhost:3000",
-};
+// const corsoption = {
+//   origin: "http://localhost:3000",
+// };
 // Khai bao cors
-app.use(cors(corsoption));
+app.use(cors());
 // use bodyparser convert json
 app.use(bodyparser.json());
 // Middleware xac thuc token nguoi dung
