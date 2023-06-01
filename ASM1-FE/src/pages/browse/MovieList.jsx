@@ -14,6 +14,7 @@ import { TOKEN } from '../../Token/Token';
 export const movieList = createContext()
 //Danh sách link API
 const MovieList = () => {
+    const link = process.env.REACT_APP_URL_FETCH;
     // State set page
     const [statepageOriginals, setstatepageOriginals] = useState(1)
     const [statepageTrending, setstatepageTrending] = useState(1)
@@ -25,14 +26,14 @@ const MovieList = () => {
     const [statepageDocumentaries, setstatepageDocumentaries] = useState(1)
 
     const requests = {
-        fetchTrending: `http://localhost:5000/api/movies/trending/${statepageTrending}${TOKEN}`,
-        fetchNetflixOriginals: `http://localhost:5000/api/movies/discover/35${TOKEN}&page=${statepageOriginals}`,
-        fetchTopRated: `http://localhost:5000/api/movies/top-rate/${statepageTopRated}${TOKEN}`,
-        fetchActionMovies: `http://localhost:5000/api/movies/discover/28${TOKEN}&page=${statepageActionMovies}`,
-        fetchComedyMovies: `http://localhost:5000/api/movies/discover/35${TOKEN}&page=${statepageComedyMovies}`,
-        fetchHorrorMovies: `http://localhost:5000/api/movies/discover/27${TOKEN}&page=${statepageHorrorMovies}`,
-        fetchRomanceMovies: `http://localhost:5000/api/movies/discover/10749${TOKEN}&page=${statepageRomanceMovies}`,
-        fetchDocumentaries: `http://localhost:5000/api/movies/discover/99${TOKEN}&page=${statepageDocumentaries}`,
+        fetchTrending: `${link}/api/movies/trending/${statepageTrending}${TOKEN}`,
+        fetchNetflixOriginals: `${link}/api/movies/discover/35${TOKEN}&page=${statepageOriginals}`,
+        fetchTopRated: `${link}/api/movies/top-rate/${statepageTopRated}${TOKEN}`,
+        fetchActionMovies: `${link}/api/movies/discover/28${TOKEN}&page=${statepageActionMovies}`,
+        fetchComedyMovies: `${link}/api/movies/discover/35${TOKEN}&page=${statepageComedyMovies}`,
+        fetchHorrorMovies: `${link}/api/movies/discover/27${TOKEN}&page=${statepageHorrorMovies}`,
+        fetchRomanceMovies: `${link}/api/movies/discover/10749${TOKEN}&page=${statepageRomanceMovies}`,
+        fetchDocumentaries: `${link}/api/movies/discover/99${TOKEN}&page=${statepageDocumentaries}`,
         // fetchSearch: `/search/movie?api_key=${API_KEY}&language=en-US`,
     };
     // Gắn cho phần detail để scroll xuống
@@ -95,7 +96,7 @@ const MovieList = () => {
         // gọi API để lấy id youtube với tham số id của film vừa click
         const fetchyoutube = async function () {
             try {
-                const a = await fetch(`http://localhost:5000/api/movies/video/${detail.id}${TOKEN}`,
+                const a = await fetch(`${link}/api/movies/video/${detail.id}${TOKEN}`,
                     {
                         method: "POST",
                         body: JSON.stringify({ "a": "b" }),

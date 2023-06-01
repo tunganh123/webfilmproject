@@ -7,6 +7,7 @@ import YouTube from 'react-youtube';
 import { TOKEN } from '../../Token/Token';
 // Lưu thông tin mặc định
 const Search = () => {
+	const link = process.env.REACT_APP_URL_FETCH;
 	// Gắn cho phần detail để scroll xuống
 	const ref = useRef()
 	// Các state
@@ -34,7 +35,7 @@ const Search = () => {
 		let mediatypetk = `&mediatype=${mediatype}`
 		let languagetk = `&language=${language}`
 		let yeartk = `&year=${year}`
-		let url = `http://localhost:5000/api/movies/search/${statepage}${TOKEN}`
+		let url = `${link}/api/movies/search/${statepage}${TOKEN}`
 		let urlok = url;
 		if (genre.trim()) {
 			urlok = urlok + genretk;
@@ -107,7 +108,7 @@ const Search = () => {
 		// Call API để lấy id youtube
 		const fetchyoutube = async function () {
 			try {
-				const res = await fetch(`http://localhost:5000/api/movies/video/${result.id}${TOKEN}`,
+				const res = await fetch(`${link}/api/movies/video/${result.id}${TOKEN}`,
 					{
 						method: "POST",
 						body: JSON.stringify({ "a": "b" }),
@@ -137,7 +138,7 @@ const Search = () => {
 	// fetch firm change with page change
 	const fetchfirm2 = async () => {
 		try {
-			const a = await fetch(`http://localhost:5000/api/movies/search/${statepage}${TOKEN}`, {
+			const a = await fetch(`${link}/api/movies/search/${statepage}${TOKEN}`, {
 				method: "POST",
 				body: JSON.stringify(stateinputvalue),
 				headers:

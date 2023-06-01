@@ -5,14 +5,15 @@ import Banner from './Banner';
 import MovieList from './MovieList';
 import { TOKEN } from '../../Token/Token';
 // Danh sách link API
+const link = process.env.REACT_APP_URL_FETCH;
 const requests = {
-	fetchTrending: `http://localhost:5000/api/movies/trending/1${TOKEN}`,
-	fetchTopRated: `http://localhost:5000/api/movies/top-rate/2${TOKEN}`,
-	fetchActionMovies: `http://localhost:5000/api/movies/discover/28${TOKEN}`,
-	fetchComedyMovies: `http://localhost:5000/api/movies/discover/35${TOKEN}`,
-	fetchHorrorMovies: `http://localhost:5000/api/movies/discover/27${TOKEN}`,
-	fetchRomanceMovies: `http://localhost:5000/api/movies/discover/10749${TOKEN}`,
-	fetchDocumentaries: `http://localhost:5000/api/movies/discover/99${TOKEN}`,
+	fetchTrending: `${link}/api/movies/trending/1${TOKEN}`,
+	fetchTopRated: `${link}/api/movies/top-rate/2${TOKEN}`,
+	fetchActionMovies: `${link}/api/movies/discover/28${TOKEN}`,
+	fetchComedyMovies: `${link}/api/movies/discover/35${TOKEN}`,
+	fetchHorrorMovies: `${link}/api/movies/discover/27${TOKEN}`,
+	fetchRomanceMovies: `${link}/api/movies/discover/10749${TOKEN}`,
+	fetchDocumentaries: `${link}/api/movies/discover/99${TOKEN}`,
 	// fetchSearch: `/search/movie?api_key=${API_KEY}&language=en-US`,
 };
 ////////////////////////////////////////////////
