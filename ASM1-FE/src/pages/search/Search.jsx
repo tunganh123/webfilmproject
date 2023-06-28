@@ -5,6 +5,8 @@ import SearchForm from './SearchForm/SearchForm';
 import ResultList from './ResultList/ResultList';
 import YouTube from 'react-youtube';
 import { TOKEN } from '../../Token/Token';
+import { FacebookShareButton, TwitterShareButton } from "react-share";
+import { FacebookIcon, TwitterIcon } from "react-share";
 // Lưu thông tin mặc định
 const Search = () => {
 	const link = process.env.REACT_APP_URL_FETCH;
@@ -160,6 +162,7 @@ const Search = () => {
 	useEffect(() => {
 		fetchfirm2()
 	}, [statepage])
+	let urlok = stateidyoutube.idyoutube ? `https://www.youtube.com/watch?v=${stateidyoutube.idyoutube}` : "https://image.tmdb.org/t/p/w500" + infofirm.backdrop_path
 	return (
 		<div className={style.searchdiv}>
 			<Navbar />
@@ -179,6 +182,23 @@ const Search = () => {
 						<p>Vote: {infofirm.vote_average}/10</p>
 						<p>{infofirm.overview
 						}</p>
+						<div>
+							<FacebookShareButton
+								url={urlok}
+								description={"aiueo"}
+								className="Demo__some-network__share-button"
+							>
+								<FacebookIcon size={32} round /> Share
+							</FacebookShareButton>
+							<TwitterShareButton style={{ margin: "1rem" }}
+								title={"test"}
+								url={urlok}
+								hashtags={["hashtag1", "hashtag2"]}
+							>
+								<TwitterIcon size={32} round />
+								Share
+							</TwitterShareButton>
+						</div>
 					</div>
 					<div ref={ref} className={style.clip}>
 						{

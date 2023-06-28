@@ -10,6 +10,10 @@ import Romance from './Typefirm/Romance';
 import Documentaries from './Typefirm/Documentaries';
 import YouTube from 'react-youtube';
 import { TOKEN } from '../../Token/Token';
+import { FacebookShareButton, TwitterShareButton } from "react-share";
+import { FacebookIcon, TwitterIcon } from "react-share";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import SwiperNet from '../../UI/SwiperNet';
 // Tạo context để truyền dữ liệu
 export const movieList = createContext()
 //Danh sách link API
@@ -39,6 +43,7 @@ const MovieList = () => {
     // Gắn cho phần detail để scroll xuống
     const ref = useRef()
     // Danh sách state, mỗi thể loại lưu 1 state
+
     const [stateOriginals, setOriginals] = useState([])
     const [stateTrending, setTrending] = useState([])
     const [stateTopRated, setTopRated] = useState([])
@@ -51,6 +56,9 @@ const MovieList = () => {
     const [detailyoutube, setdetailyoutube] = useState("") //state lưu id để sử dụng Youtube
     const [check, setcheck] = useState(false)   // State kiểm tra khi click 2 lần vào cùng 1 ảnh thì ẩn/hiện detail firm
 
+    const [statechangecolor, setchangecolor] = useState("")
+    const [statelistlike, setstatelistlike] = useState([])
+    const [statecheckshowlist, setstatecheckshowlist] = useState(false)
     // Tạo hàm kết nối API
     const fetchNet = async function (type, setstate) {
         try {
@@ -85,6 +93,7 @@ const MovieList = () => {
         if (ref.current) {
             ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
         }
+        setchangecolor("")
         // Kiểm tra nếu dữ liệu của fiem vừa click == dữ liệu trạng thái trước đó thì dảo ngược trạng thái check. (Click nhiều lần vào cùng 1 film)
         // Nếu đúng thì return luôn
         if (detail == detailstate) {
@@ -160,33 +169,70 @@ const MovieList = () => {
     const selecthandlertoprated = (value) => {
         setstatepageTopRated(value)
     }
+    let urlok = detailyoutube.idyoutube ? `https://www.youtube.com/watch?v=${detailyoutube.idyoutube}` : "https://image.tmdb.org/t/p/w500" + detailstate.backdrop_path
+    const addlistmoviehandler = () => {
+        setchangecolor("yellow")
+        setstatelistlike((prev) => [...prev, detailstate])
+    }
     return (
         <>
             <movieList.Provider value={data}>
-                {/* Hiển thị danh sách firm */}
-                <div className={style.movielist}>
-                    <Original onselect={selecthandleroriginal} statee={stateOriginals} />
-                    <Trending onselect={selecthandlertrending} statee={stateTrending} />
-                    <TopRated onselect={selecthandlertoprated} statee={stateTopRated} />
-                    <ActionMovie onselect={selecthandleraction} statee={stateActionMovies} />
-                    <ComedyMovie onselect={selecthandlercomedy} statee={stateComedyMovies} />
-                    <HorrorMovie onselect={selecthandlerhorror} statee={stateHorrorMovies} />
-                    <Romance onselect={selecthandlerromance} statee={stateRomanceMovies} />
-                    <Documentaries onselect={selecthandlerdocument} statee={stateDocumentaries} />
+                <div className={style.movielist} style={{ display: "flex", justifyContent: 'flex-end' }}>
+                    <button onClick={() => {
+                        setdetailstate("")
+                        setstatecheckshowlist((prev) => !prev)
+                    }} >Show my list</button>
+
                 </div>
+                {/* Hiển thị danh sách firm */}
+                {
+                    !statecheckshowlist ?
+                        <div className={style.movielist}>
+                            <Original onselect={selecthandleroriginal} statee={stateOriginals} />
+                            <Trending onselect={selecthandlertrending} statee={stateTrending} />
+                            <TopRated onselect={selecthandlertoprated} statee={stateTopRated} />
+                            <ActionMovie onselect={selecthandleraction} statee={stateActionMovies} />
+                            <ComedyMovie onselect={selecthandlercomedy} statee={stateComedyMovies} />
+                            <HorrorMovie onselect={selecthandlerhorror} statee={stateHorrorMovies} />
+                            <Romance onselect={selecthandlerromance} statee={stateRomanceMovies} />
+                            <Documentaries onselect={selecthandlerdocument} statee={stateDocumentaries} />
+                        </div>
+                        :
+                        <div className={style.movielist}>
+                            <SwiperNet statee={{ results: statelistlike }} />
+                        </div>
+                }
                 {
                     // Kiểm tra check phải bằng true và tồn tại thông tin 1 bộ firm cụ thể vừa click thì mới hiển thị
                     (detailstate != "" && check) &&
                     // Thông tin cụ thể của film mới click
                     <div className={style.detail}>
                         <div className={style.info}>
-                            <h2>{detailstate.original_title}</h2>
+                            <h2>{detailstate.original_title} <FontAwesomeIcon color={statechangecolor} onClick={addlistmoviehandler} style={{ marginLeft: "1rem" }} icon="fa-solid fa-folder-plus" /> </h2>
                             <p>Release Date: {detailstate.release_date
                             }</p>
                             <p>Vote: {detailstate.vote_average}/10</p>
                             <p>{detailstate.overview
                             }</p>
+                            <div>
+                                <FacebookShareButton
+                                    url={urlok}
+                                    description={"aiueo"}
+                                    className="Demo__some-network__share-button"
+                                >
+                                    <FacebookIcon size={32} round /> Share
+                                </FacebookShareButton>
+                                <TwitterShareButton style={{ margin: "1rem" }}
+                                    title={"test"}
+                                    url={urlok}
+                                    hashtags={["hashtag1", "hashtag2"]}
+                                >
+                                    <TwitterIcon size={32} round />
+                                    Share
+                                </TwitterShareButton>
+                            </div>
                         </div>
+
                         <div ref={ref} className={style.clip}>
                             {
                                 // Kiểm tra nếu detailyoutube tồn tại idyoutube thì sẽ hiện thị click còn không sẽ hiện thị ảnh backdrops
@@ -198,6 +244,7 @@ const MovieList = () => {
                             }
 
                         </div>
+
                     </div>
                 }
             </movieList.Provider>
