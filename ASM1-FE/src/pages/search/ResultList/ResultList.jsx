@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import style from "./ResultList.module.css"
+import style from "../../css/ResultList.module.css"
 import Imgresult from './ImgResult';
 const ResultList = ({ resultfirm, OnclickHandler, onselect }) => {
     const ref = useRef()

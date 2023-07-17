@@ -9,7 +9,7 @@ const Trending = ({ statee, onselect }) => {
     }
     const d = document.querySelector("#selectoptionTrending")
     const changeHandler = () => {
-        onselect(d.value)
+        onselect("Trending", d.value)
     }
     return (
         <div>

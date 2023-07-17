@@ -1,5 +1,5 @@
 import React from 'react';
-import style from "./Banner.module.css"
+import style from "../css/Banner.module.css"
 const Banner = ({ firmRandom }) => {
     return (
         <div className={style.banner} >

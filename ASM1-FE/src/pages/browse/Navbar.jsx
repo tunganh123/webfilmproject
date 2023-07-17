@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./Navbar.css"
+import "../css/Navbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // Cài đặt và import Fontawesome để lấy hình search
 const Navbar = () => {
     const navi = useNavigate()
     const [state, setstate] = useState()
-    //
     // Add sự kiện cuộn cho window
     window.addEventListener("scroll", function () {
-
         if (this.window.scrollY > 100) {
             setstate("background")
         } else setstate()

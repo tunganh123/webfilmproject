@@ -1,34 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
-import style from "./Browse.module.css"
+import style from "../css/Browse.module.css"
 import Banner from './Banner';
 import MovieList from './MovieList';
 import { TOKEN } from '../../Token/Token';
-// Danh sách link API
-const link = process.env.REACT_APP_URL_FETCH;
-const requests = {
-	fetchTrending: `${link}/api/movies/trending/1${TOKEN}`,
-	fetchTopRated: `${link}/api/movies/top-rate/2${TOKEN}`,
-	fetchActionMovies: `${link}/api/movies/discover/28${TOKEN}`,
-	fetchComedyMovies: `${link}/api/movies/discover/35${TOKEN}`,
-	fetchHorrorMovies: `${link}/api/movies/discover/27${TOKEN}`,
-	fetchRomanceMovies: `${link}/api/movies/discover/10749${TOKEN}`,
-	fetchDocumentaries: `${link}/api/movies/discover/99${TOKEN}`,
-	// fetchSearch: `/search/movie?api_key=${API_KEY}&language=en-US`,
-};
+import { fetchData } from '../../utils/fetchdata';
 ////////////////////////////////////////////////
 function Browse() {
 	// stateOriginals để lấy danh sách film Originals và chọn random 1 bộ 
 	const [stateOriginals, setOriginals] = useState([])
 	// Hàm fetch API
-	const fetchNetflixOriginals = async function (type, setstate) {
-		const a = await fetch(type)
-		const b = await a.json();
-		setstate(b)
-	}
 	// Cho chạy lần đầu khi duyệt web
 	useEffect(() => {
-		fetchNetflixOriginals(requests.fetchTopRated, setOriginals)
+		fetchData(`api/movies/top-rate/2${TOKEN}`, setOriginals)
 	}, [])
 	// Lấy numberRandom = 0->19 ( Vì danh sách trả về mảng 20 phần tử)
 	const numberRandom = Math.floor(Math.random() * 20)

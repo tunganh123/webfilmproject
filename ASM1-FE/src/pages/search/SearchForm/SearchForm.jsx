@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import style from "./Searchform.module.css"
+import style from "../../css/Searchform.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SearchForm = ({ onsearch }) => {
@@ -19,7 +19,6 @@ const SearchForm = ({ onsearch }) => {
             language: reflanguage.current.value,
             year: refyear.current.value.trim()
         }
-
         // Gọi hàm callback
         onsearch.search(datainput)
     }
@@ -30,7 +29,7 @@ const SearchForm = ({ onsearch }) => {
         onsearch.reset()
     }
     return (
-        <form action="" className={style.form}>
+        <form className={style.form} onSubmit={searchHandler}>
             <div className={style.searchform}>
                 <input ref={ref} type="text" placeholder='input type firm please!' />
                 <FontAwesomeIcon style={{ width: "30px", height: "2rem", marginRight: "20px", fontWeight: "400", color: "rgb(80, 69, 69)" }} icon="fa-solid fa-magnifying-glass" />
@@ -66,8 +65,8 @@ const SearchForm = ({ onsearch }) => {
             </div>
 
             <div className={style.btnform}>
+                <button type="submit" >SEARCH</button>
                 <button onClick={resetHandler}>RESET</button>
-                <button onClick={searchHandler}>SEARCH</button>
             </div>
         </form>
     )

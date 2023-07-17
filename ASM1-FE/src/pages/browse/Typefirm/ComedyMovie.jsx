@@ -8,7 +8,7 @@ const ComedyMovie = ({ statee, onselect }) => {
     }
     const d = document.querySelector("#selectoptionComedy")
     const changeHandler = () => {
-        onselect(d.value)
+        onselect("ComedyMovies", d.value)
     }
     return (
         <div>

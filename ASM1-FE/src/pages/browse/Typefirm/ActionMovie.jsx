@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import SwiperNet from '../../../UI/SwiperNet';
 const ActionMovie = ({ statee, onselect }) => {
     // Tao mang arroption 1-> pagemax
@@ -10,7 +10,7 @@ const ActionMovie = ({ statee, onselect }) => {
     const d = document.querySelector("#selectoptionaction")
     // Change select -> call ham ben movielist
     const changeHandler = () => {
-        onselect(d.value)
+        onselect("ActionMovies", d.value)
     }
     return (
         <div>

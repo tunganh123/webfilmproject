@@ -14,7 +14,6 @@
 .detail {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin: 30px 50px;
     margin-bottom: 80px;
 }
 

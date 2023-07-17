@@ -9,7 +9,7 @@ const TopRated = ({ statee, onselect }) => {
     }
     const d = document.querySelector("#selectoptionTopRated")
     const changeHandler = () => {
-        onselect(d.value)
+        onselect("TopRated", d.value)
     }
     return (
         <div>
